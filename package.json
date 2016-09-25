@@ -1,7 +1,7 @@
 {
   "name": "redux-saga-rest",
   "version": "0.0.1",
-  "description": "Thin wrapper around the Fetch API with middleware support for use with redux-saga.",
+  "description": "Thin wrapper around the Fetch API with middleware for use with redux-saga.",
   "main": "dist/main.js",
   "module": "dist/es.js",
   "jsnext:main": "dist/es.js",
@@ -56,7 +56,7 @@
     "ts-loader": "^0.8.0",
     "tslint": "^3.15.0-dev.0",
     "tslint-loader": "^2.1.5",
-    "typescript": "^2.1.0-dev.20160924",
+    "typescript": "^2.1.0-dev.20160925",
     "typings": "^1.3.3",
     "webpack": "^2.1.0-beta.22"
   },
