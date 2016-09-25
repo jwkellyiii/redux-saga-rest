@@ -1,0 +1,69 @@
+{
+  "name": "redux-saga-rest",
+  "version": "0.0.1",
+  "description": "Thin wrapper around the Fetch API with middleware support for use with redux-saga.",
+  "main": "dist/main.js",
+  "module": "dist/es.js",
+  "jsnext:main": "dist/es.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zach-waggoner/redux-saga-rest.git"
+  },
+  "keywords": [
+    "redux",
+    "saga",
+    "rest",
+    "fetch",
+    "middleware"
+  ],
+  "author": "Zach Waggoner <zach.waggoner1@gmail.com> (https://github.com/zach-waggoner)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zach-waggoner/redux-saga-rest/issues"
+  },
+  "homepage": "https://github.com/zach-waggoner/redux-saga-rest#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/gulp": "^3.8.32",
+    "@types/isomorphic-fetch": "0.0.31",
+    "@types/webpack": "^1.12.34",
+    "babel-core": "^6.14.0",
+    "babel-eslint": "^6.1.2",
+    "babel-loader": "^6.2.5",
+    "babel-polyfill": "^6.13.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "eslint": "^3.5.0",
+    "eslint-import-resolver-webpack": "^0.6.0",
+    "eslint-loader": "^1.5.0",
+    "eslint-plugin-babel": "^3.3.0",
+    "eslint-plugin-import": "^1.15.0",
+    "eslint-plugin-react": "^6.2.2",
+    "gulp": "^3.9.1",
+    "gulp-util": "^3.0.7",
+    "isomorphic-fetch": "^2.2.1",
+    "lodash": "^4.15.0",
+    "node-glob": "^1.2.0",
+    "redux": "^3.5.2",
+    "redux-saga": "^0.11.1",
+    "run-sequence": "^1.2.2",
+    "ts-loader": "^0.8.0",
+    "tslint": "^3.15.0-dev.0",
+    "tslint-loader": "^2.1.5",
+    "typescript": "^2.1.0-dev.20160924",
+    "typings": "^1.3.3",
+    "webpack": "^2.1.0-beta.22"
+  },
+  "npmName": "redux-saga-rest",
+  "npmFileMap": [],
+  "scripts": {
+    "start": "gulp run",
+    "test": "gulp test"
+  }
+}
