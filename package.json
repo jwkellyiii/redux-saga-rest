@@ -1,6 +1,6 @@
 {
   "name": "redux-saga-rest",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Thin wrapper around the Fetch API with middleware for use with redux-saga.",
   "main": "dist/main.js",
   "module": "dist/es.js",
