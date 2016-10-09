@@ -18,9 +18,6 @@ export default {
 
     plugins: [
         new webpack.NoErrorsPlugin(),
-        new webpack.ProvidePlugin({
-            _: 'lodash',
-        }),
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({compress: {warnings: false}}),
         new webpack.LoaderOptionsPlugin({minimize: true, debug: false}),
@@ -29,7 +26,7 @@ export default {
     module: {
         loaders: [
             {
-                test: /\.ts$/,
+                test: /\.tsx?$/,
                 loaders: [
                     {
                         loader: 'babel',
@@ -48,6 +45,6 @@ export default {
             path.join(__dirname, 'src'),
             path.join(__dirname, 'node_modules'),
         ],
-        extensions: ['.webpack.js', '.web.js', '.js', '.ts'],
+        extensions: ['.webpack.js', '.web.js', '.js', '.jsx', '.ts', '.tsx'],
     },
 }

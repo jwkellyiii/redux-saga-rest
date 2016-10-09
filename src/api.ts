@@ -42,7 +42,7 @@ export class API {
 
     fetch(info: RequestInfo, init?: RequestInit) {
         if (typeof info === 'string' && !util.isURL(info) && this.baseUrl) {
-            info = util.joinPaths(this.baseUrl, info);
+            info = util.joinPaths(this.baseUrl, info as string);
         }
         return call(this.applyMiddlewares.bind(this), new Request(info, init));
     }
