@@ -1,50 +1,54 @@
-import * as path from 'path';
 import * as webpack from 'webpack';
 
-export const webpackStats = {
-    chunks: false,
-    colors: true,
-};
 
-export default {
-    entry: path.join(__dirname, 'src/index.ts'),
-
-    output: {
-        path: path.join(__dirname, 'dist'),
-        filename: 'main.js'
-    },
-
-    devtool: 'source-map',
-
-    plugins: [
-        new webpack.NoErrorsPlugin(),
-        new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.UglifyJsPlugin({compress: {warnings: false}}),
-        new webpack.LoaderOptionsPlugin({minimize: true, debug: false}),
-    ],
-
+const config = {
     module: {
         loaders: [
             {
-                test: /\.tsx?$/,
-                loaders: [
-                    {
-                        loader: 'babel',
-                        query: {
-                            presets: [['es2015', {modules: false}], 'stage-0'],
-                        },
-                    },
-                    'ts',
-                ],
+                test: /\.ts$/,
+                loaders: ['babel', 'ts'],
+                exclude: /node_modules/,
             },
-        ],
+        ]
     },
 
-    resolve: {
-        modules: [
-            path.join(__dirname, 'src'),
-            path.join(__dirname, 'node_modules'),
-        ],
-        extensions: ['.webpack.js', '.web.js', '.js', '.jsx', '.ts', '.tsx'],
+    output: {
+        library: 'ReduxSagaRest',
+        libraryTarget: 'umd',
     },
+
+    plugins: [
+        new webpack.optimize.OccurrenceOrderPlugin(),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+        }),
+    ],
+
+    resolve: {
+        extensions: ['.webpack.js', '.web.js', '.js', '.babel.js', '.ts'],
+    },
+
+    externals: {
+        "redux": {
+            root: 'Redux',
+            commonjs2: 'redux',
+            commonjs: 'redux',
+            amd: 'redux'
+        },
+        "redux-saga": {
+            root: 'ReduxSaga',
+            commonjs2: 'redux-saga',
+            commonjs: 'redux-saga',
+            amd: 'redux-saga'
+        },
+    },
+};
+
+if (process.env.NODE_ENV === 'production') {
+    config.plugins.push(
+        new webpack.optimize.UglifyJsPlugin({compress: {warnings: false}}),
+        new webpack.LoaderOptionsPlugin({minimize: true, debug: false})
+    );
 }
+
+export default config;

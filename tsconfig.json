@@ -8,6 +8,7 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
+    "declaration": false,
     "types": ["typescript/lib/lib.dom", "typescript/lib/lib.es2017", "isomorphic-fetch"]
   }
 }

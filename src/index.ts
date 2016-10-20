@@ -1,7 +1,7 @@
-import { API } from './api';
+import API from './api';
 import { defaultMiddleware } from './middleware';
 
-export default {
+export {
     API,
     defaultMiddleware,
 }

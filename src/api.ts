@@ -2,23 +2,28 @@ import { call, CallEffect } from 'redux-saga/effects';
 
 import * as util from './util';
 
+
 export interface APIMiddlewareFactory {
     (config?: any): APIMiddleware;
 }
+
 
 export interface APIMiddleware {
     (req?: IRequest, next?: APINext, refresh?: APIRefresh): any;
 }
 
+
 export interface APINext {
-    (req: IRequest): CallEffect;
+    (req: IRequest): IterableIterator<CallEffect>|Promise<IResponse>;
 }
+
 
 export interface APIRefresh {
     (): CallEffect;
 }
 
-export class API {
+
+export default class API {
     private middlewares: APIMiddleware[] = [];
 
     constructor(private baseUrl?: string) { }
@@ -51,18 +56,10 @@ export class API {
         init = init || {};
         init.method = method;
         if (params) {
-            if (typeof params === 'string') {
-                url += `?${params}`;
-            } else {
-                url += `?${util.encode(params)}`;
-            }
+            url += `?${util.encode(params)}`;
         }
         if (entity) {
-            if (typeof entity === 'string') {
-                init.body = entity;
-            } else {
-                init.body = util.encode(entity);
-            }
+            init.body = entity instanceof FormData ? entity : util.encode(entity);
         }
         return this.fetch(url, init);
     }

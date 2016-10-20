@@ -1,4 +1,8 @@
-/dist/
-.idea/
-node_modules/
 .DS_Store
+*.log
+.idea
+node_modules
+build
+lib
+es
+dist
