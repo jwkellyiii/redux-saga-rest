@@ -7,12 +7,12 @@ export interface APIMiddlewareFactory {
 
 
 export interface APIMiddleware {
-	(req?: IRequest, next?: APINext, refresh?: APIRefresh): any;
+	(req?: Request, next?: APINext, refresh?: APIRefresh): any;
 }
 
 
 export interface APINext {
-	(req: IRequest): IterableIterator<CallEffect> | Promise<IResponse>;
+	(req: Request): IterableIterator<CallEffect> | Promise<Response>;
 }
 
 
