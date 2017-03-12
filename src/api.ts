@@ -2,38 +2,33 @@ import { call, CallEffect } from 'redux-saga/effects';
 
 import * as util from './util';
 
-
 export interface APIMiddlewareFactory {
     (config?: any): APIMiddleware;
 }
 
-
 export interface APIMiddleware {
-    (req?: IRequest, next?: APINext, refresh?: APIRefresh): any;
+    (req?: Request, next?: APINext, refresh?: APIRefresh): any;
 }
-
 
 export interface APINext {
-    (req: IRequest): IterableIterator<CallEffect>|Promise<IResponse>;
+    (req: Request): IterableIterator<CallEffect>|Promise<Response>;
 }
-
 
 export interface APIRefresh {
     (): CallEffect;
 }
-
 
 export default class API {
     private middlewares: APIMiddleware[] = [];
 
     constructor(private baseUrl?: string) { }
 
-    private applyMiddlewares = function* (req: IRequest) {
+    private applyMiddlewares = function* (req: Request) {
 
         // Clone the request before applying the middleware, because the middleware will be reapplied.
         const refresh = () => this.fetch(req.clone());
 
-        const combinedMiddleware = this.middlewares.reduce((acc: APINext, next: APIMiddleware) => function* (req: IRequest) {
+        const combinedMiddleware = this.middlewares.reduce((acc: APINext, next: APIMiddleware) => function* (req: Request) {
             return yield call(next, req, acc, refresh);
         }, fetch);
 

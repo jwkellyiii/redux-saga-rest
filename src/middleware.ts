@@ -1,7 +1,6 @@
 import { APIMiddlewareFactory, APINext } from './api';
 
-
-export const defaultMiddleware: APIMiddlewareFactory = () => function* (req: IRequest, next: APINext): any {
+export const defaultMiddleware: APIMiddlewareFactory = () => function* (req: Request, next: APINext): any {
     const headers = req.headers || new Headers();
     if (['POST', 'PUT', 'PATCH'].includes(req.method)) {
 

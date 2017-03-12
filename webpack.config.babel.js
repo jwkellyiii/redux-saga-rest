@@ -1,15 +1,14 @@
 import * as webpack from 'webpack';
 
-
 const config = {
     module: {
-        loaders: [
+        rules: [
             {
-                test: /\.ts$/,
-                loaders: ['babel', 'ts'],
+                test: /\.tsx?$/,
+                use: ['babel-loader', 'ts-loader'],
                 exclude: /node_modules/,
             },
-        ]
+        ],
     },
 
     output: {
@@ -18,7 +17,6 @@ const config = {
     },
 
     plugins: [
-        new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         }),
@@ -46,8 +44,8 @@ const config = {
 
 if (process.env.NODE_ENV === 'production') {
     config.plugins.push(
-        new webpack.optimize.UglifyJsPlugin({compress: {warnings: false}}),
-        new webpack.LoaderOptionsPlugin({minimize: true, debug: false})
+        new webpack.optimize.UglifyJsPlugin(),
+        new webpack.LoaderOptionsPlugin({minimize: true, debug: false}),
     );
 }
 

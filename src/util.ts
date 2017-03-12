@@ -4,9 +4,7 @@ export const joinPaths = (...paths: string[]) => {
     return trailingSlash ? joinedPath + '/' : joinedPath;
 };
 
-
 export const isURL = (s: string) => /^(http|https|ftp):\/\//.test(s);
-
 
 export const encode = (data: any) => {
     return Object.keys(data).map((key) => [key, data[key]].map(encodeURIComponent).join('=')).join('&');

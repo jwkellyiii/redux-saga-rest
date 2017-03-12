@@ -1,12 +1,7 @@
 import gulp from 'gulp';
-import runSequence from 'run-sequence';
 import * as dts from 'dts-generator';
 
-
-gulp.task('default', (cb) => {
-    runSequence('dts', cb);
-});
-
+gulp.task('default', ['dts']);
 
 gulp.task('dts', () => {
     dts.default({
