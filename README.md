@@ -25,21 +25,21 @@ import * as selectors from './selectors';
 import * as actions from './actions';
 
 const authMiddleware: APIMiddlewareFactory = () => function* (req, next) {
+
+    // request middleware
     const user = yield select(selectors.user);
-    
-    if (!user.isAuthenticated) {
-        throw new Error(`Tried to access ${req.url}, but user is not authenticated.`);
-    }
-    
     const headers = req.headers || new Headers();
     headers.set('Authorization', `Bearer ${user.token}`);
 
+    // retrieve the response
     const res = yield next(new Request(req, { headers }));
 
+    // response middleware
     if (res.status === 401) {
         yield put(actions.logout());
     }
-    
+
+    // return the response
     return res;
 };
 
@@ -52,15 +52,14 @@ export const auth = new API('/api/')
 #### `sagas.js`
 
 ```javascript
-import { takeEvery } from 'redux-saga';
-import { put } from 'redux-saga/effects';
+import { takeEvery, put } from 'redux-saga/effects';
 
 import * as constants from './constants';
 import * as actions from './actions';
 import { auth } from './api';
 
 function* watchUpdateProfile() {
-    yield* takeEvery(constants.UPDATE_PROFILE, function* (action) {
+    yield takeEvery(constants.UPDATE_PROFILE, function* (action) {
         const res = yield auth.patch('/profile/', action.payload);
         
         if (res.ok) {
@@ -73,7 +72,6 @@ function* watchUpdateProfile() {
 
 export default function* () {
     yield [
-        // ...
         watchUpdateProfile(),
     ];
 };
