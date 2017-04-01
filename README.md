@@ -24,7 +24,7 @@ import { API } from 'redux-saga-rest';
 import * as selectors from './selectors';
 import * as actions from './actions';
 
-const authMiddleware: APIMiddlewareFactory = () => function* (req, next) {
+const authMiddleware = () => function* (req, next) {
 
     // request middleware
     const user = yield select(selectors.user);
