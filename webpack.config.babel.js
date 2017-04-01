@@ -44,8 +44,8 @@ const config = {
 
 if (process.env.NODE_ENV === 'production') {
     config.plugins.push(
-        new webpack.optimize.UglifyJsPlugin(),
-        new webpack.LoaderOptionsPlugin({minimize: true, debug: false}),
+        new webpack.optimize.UglifyJsPlugin({sourceMap: true}),
+        new webpack.LoaderOptionsPlugin({minimize: true}),
     );
 }
 

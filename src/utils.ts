@@ -6,6 +6,6 @@ export const joinPaths = (...paths: string[]) => {
 
 export const isURL = (s: string) => /^(http|https|ftp):\/\//.test(s);
 
-export const encode = (data: any) => {
+export const queryString = (data: any) => {
     return Object.keys(data).map((key) => [key, data[key]].map(encodeURIComponent).join('=')).join('&');
 };

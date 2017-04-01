@@ -1,11 +1,11 @@
 {
-  "presets": ["es2015", "stage-0"],
+  "presets": ["es2015"],
   "env": {
     "commonjs": {
-      "presets": ["es2015", "stage-0"]
+      "presets": ["es2015"]
     },
     "es": {
-      "presets": [["es2015", {"modules": false}], "stage-0"]
+      "presets": [["es2015", {"modules": false}]]
     }
   }
 }

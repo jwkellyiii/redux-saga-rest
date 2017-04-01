@@ -1,6 +1,6 @@
 import { call, CallEffect } from 'redux-saga/effects';
 
-import * as util from './util';
+import * as utils from './utils';
 
 export interface APIMiddlewareFactory {
     (config?: any): APIMiddleware;
@@ -41,8 +41,8 @@ export default class API {
     }
 
     fetch(info: RequestInfo, init?: RequestInit) {
-        if (typeof info === 'string' && !util.isURL(info) && this.baseUrl) {
-            info = util.joinPaths(this.baseUrl, info as string);
+        if (typeof info === 'string' && !utils.isURL(info) && this.baseUrl) {
+            info = utils.joinPaths(this.baseUrl, info as string);
         }
         return call(this.applyMiddlewares.bind(this), new Request(info, init));
     }
@@ -63,7 +63,7 @@ export default class API {
         }
 
         if (params) {
-            url += `?${util.encode(params)}`;
+            url += `?${utils.queryString(params)}`;
         }
 
         if (entity) {
@@ -71,7 +71,7 @@ export default class API {
                 init.body = entity;
             } else {
                 if (init.headers.get('Content-Type') === 'application/x-www-form-urlencoded') {
-                    init.body = util.encode(entity);
+                    init.body = utils.queryString(entity);
                 } else if (init.headers.get('Content-Type') === 'application/json') {
                     init.body = JSON.stringify(entity);
                 } else {

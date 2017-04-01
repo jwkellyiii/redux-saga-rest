@@ -27,5 +27,3 @@ export class API {
 	patch(url: string, entity?: any, init?: RequestInit): CallEffect;
 	del(url: string, init?: RequestInit): CallEffect;
 }
-
-export const defaultMiddleware: APIMiddlewareFactory;
