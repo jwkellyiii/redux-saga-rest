@@ -50,12 +50,36 @@ export default class API {
     request(url: string, method: string, params?: any, entity?: any, init?: RequestInit) {
         init = init || {};
         init.method = method;
+
+        if (!init.hasOwnProperty('headers')) {
+            init.headers = new Headers();
+            if (!init.headers.has('Content-Type')) {
+                if (init.method === 'GET') {
+                    init.headers.set('Content-Type', 'text/plain;charset=UTF-8');
+                } else if (['POST', 'PUT', 'PATCH'].includes(init.method)) {
+                    init.headers.set('Content-Type', 'application/x-www-form-urlencoded');
+                }
+            }
+        }
+
         if (params) {
             url += `?${util.encode(params)}`;
         }
+
         if (entity) {
-            init.body = entity instanceof FormData ? entity : util.encode(entity);
+            if (entity instanceof FormData || typeof entity === 'string') {
+                init.body = entity;
+            } else {
+                if (init.headers.get('Content-Type') === 'application/x-www-form-urlencoded') {
+                    init.body = util.encode(entity);
+                } else if (init.headers.get('Content-Type') === 'application/json') {
+                    init.body = JSON.stringify(entity);
+                } else {
+                    init.body = entity;
+                }
+            }
         }
+
         return this.fetch(url, init);
     }
 

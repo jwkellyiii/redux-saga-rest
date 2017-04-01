@@ -19,7 +19,7 @@ yarn add redux-saga-rest
 
 ```javascript
 import { put, select } from 'redux-saga/effects';
-import { API, defaultMiddleware } from 'redux-saga-rest';
+import { API } from 'redux-saga-rest';
 
 import * as selectors from './selectors';
 import * as actions from './actions';
@@ -46,11 +46,10 @@ const authMiddleware: APIMiddlewareFactory = () => function* (req, next) {
 
 
 export const auth = new API('/api/')
-    .use(defaultMiddleware())
     .use(authMiddleware());
 ```
 
-**TODO:** Describe defaultMiddleware, and describe the middleware application order.
+**TODO:** Describe the middleware application order.
 
 #### `sagas.js`
 
