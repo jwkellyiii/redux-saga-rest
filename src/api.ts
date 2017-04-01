@@ -53,12 +53,12 @@ export default class API {
 
         if (!init.hasOwnProperty('headers')) {
             init.headers = new Headers();
-            if (!init.headers.has('Content-Type')) {
-                if (init.method === 'GET') {
-                    init.headers.set('Content-Type', 'text/plain;charset=UTF-8');
-                } else if (['POST', 'PUT', 'PATCH'].includes(init.method)) {
-                    init.headers.set('Content-Type', 'application/x-www-form-urlencoded');
-                }
+        }
+        if (!init.headers.has('Content-Type')) {
+            if (init.method === 'GET') {
+                init.headers.set('Content-Type', 'text/plain;charset=UTF-8');
+            } else if (['POST', 'PUT', 'PATCH'].includes(init.method)) {
+                init.headers.set('Content-Type', 'application/x-www-form-urlencoded');
             }
         }
 

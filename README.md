@@ -24,7 +24,6 @@ import { API } from 'redux-saga-rest';
 import * as selectors from './selectors';
 import * as actions from './actions';
 
-
 const authMiddleware: APIMiddlewareFactory = () => function* (req, next) {
     const user = yield select(selectors.user);
     
@@ -44,7 +43,6 @@ const authMiddleware: APIMiddlewareFactory = () => function* (req, next) {
     return res;
 };
 
-
 export const auth = new API('/api/')
     .use(authMiddleware());
 ```
@@ -61,7 +59,6 @@ import * as constants from './constants';
 import * as actions from './actions';
 import { auth } from './api';
 
-
 function* watchUpdateProfile() {
     yield* takeEvery(constants.UPDATE_PROFILE, function* (action) {
         const res = yield auth.patch('/profile/', action.payload);
@@ -73,7 +70,6 @@ function* watchUpdateProfile() {
         }
     });
 }
-
 
 export default function* () {
     yield [
