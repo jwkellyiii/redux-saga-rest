@@ -47,8 +47,8 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "redux": "^3.0.0",
-    "redux-saga": "^0.15.0"
+    "redux": "^4.0.0",
+    "redux-saga": "^0.16.0"
   },
   "npmName": "redux-saga-rest",
   "scripts": {
